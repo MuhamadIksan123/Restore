@@ -1,5 +1,6 @@
 using System;
 using API.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
@@ -11,12 +12,37 @@ public class DbInitializer
         using var scope = app.Services.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<StoreContext>() ?? throw new InvalidOperationException("Failed to rerieve store context");
 
-        SeedData(context);
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>() ?? throw new InvalidOperationException("Failed to rerieve user manager");
+
+
+        SeedData(context, userManager);
     }
 
-    private static void SeedData(StoreContext context)
+    private static async void SeedData(StoreContext context, UserManager<User> userManager)
     {
         context.Database.Migrate();
+        
+        if(!userManager.Users.Any())
+        {
+            var user = new User
+            {
+                UserName = "bob@test.com",
+                Email = "bob@test.com"
+            };
+
+            await userManager.CreateAsync(user, "Pas$$w0rd");
+            await userManager.AddToRoleAsync(user, "Member");
+
+            var admin = new User
+            {
+                UserName = "admin@test.com",
+                Email = "admin@gmail.com"
+            };
+
+            await userManager.CreateAsync(admin, "Pas$$w0rd");
+            await userManager.AddToRolesAsync(admin, ["Member", "Admin"]);
+        }
+
         if(context.Products.Any()) return;
 
         var products = new List<Product>
