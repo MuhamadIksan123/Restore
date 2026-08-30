@@ -481,3 +481,10 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 API/appsettings.json
+
+# Ignore environment variables in client folder
+client/.env
+client/.env.*
+
+# Ignore appsettings development files
+API/appsettings.Development.json
