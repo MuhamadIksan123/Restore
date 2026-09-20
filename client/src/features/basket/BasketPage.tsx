@@ -8,6 +8,8 @@ export default function BasketPage() {
 
   if (isLoading) return <Typography>Loading basket...</Typography>;
 
+  console.log(data);
+
   if (!data) return <Typography variant="h3">Your basket is empty</Typography>;
 
   return (

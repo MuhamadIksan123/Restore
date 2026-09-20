@@ -12,7 +12,11 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { currencyFormat, formatAddressString, formatPaymentString } from "../../lib/util";
+import {
+  currencyFormat,
+  formatAddressString,
+  formatPaymentString,
+} from "../../lib/util";
 import { format } from "date-fns";
 
 export default function OrderDetailedPage() {
@@ -112,7 +116,7 @@ export default function OrderDetailedPage() {
             Order date
           </Typography>
           <Typography component="dd" variant="body2" sx={{ fontWeight: 300 }}>
-            {format(order.orderDate, "dd MM yyyy")}
+            {format(order.orderDate, "dd MMM yyyy")}
           </Typography>
         </Box>
       </Box>
@@ -182,7 +186,7 @@ export default function OrderDetailedPage() {
           </Typography>
         </Box>
 
-         <Box
+        <Box
           component="dl"
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
@@ -198,12 +202,15 @@ export default function OrderDetailedPage() {
           </Typography>
         </Box>
       </Box>
-      <Box component="dl" sx={{ display: "flex", justifyContent: "space-between", mx: 3}}>
-        <Typography component="dt" variant="subtitle1" sx={{ fontWeight: 500}}>
-            Total
+      <Box
+        component="dl"
+        sx={{ display: "flex", justifyContent: "space-between", mx: 3 }}
+      >
+        <Typography component="dt" variant="subtitle1" sx={{ fontWeight: 500 }}>
+          Total
         </Typography>
-        <Typography component="dd" variant="body2" sx={{ fontWeight: 700}}>
-            {currencyFormat(order.total)}
+        <Typography component="dd" variant="body2" sx={{ fontWeight: 700 }}>
+          {currencyFormat(order.total)}
         </Typography>
       </Box>
     </Card>

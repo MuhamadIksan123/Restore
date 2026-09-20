@@ -45,7 +45,7 @@ export default function OrderPage() {
                 style={{ cursor: "pointer" }}
               >
                 <TableCell sx={{ textAlign: "center" }}># {order.id}</TableCell>
-                <TableCell>{format(order.orderDate, "dd MM yyyy")}</TableCell>
+                <TableCell>{format(order.orderDate, "dd MMM yyyy")}</TableCell>
                 <TableCell>{currencyFormat(order.total)}</TableCell>
                 <TableCell>{order.orderStatus}</TableCell>
               </TableRow>
